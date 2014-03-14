@@ -45,7 +45,8 @@ public class StudentHome extends HttpServlet {
             out.println("<li><a href=\"CourseMaterial.view\">View Course Material</a></li>");
             out.println("<li><a href=\"Forum.view\">Forum</li></a>");
             out.println("<li><a href=\"Feedback.view\">Feedback</li></a>");
-            out.println("<li><a href=\"ChangePassword.view\">Change Password</li></a></ul>");
+            out.println("<li><a href=\"ChangePassword.view\">Change Password</li></a>");
+            out.println("</ul>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
