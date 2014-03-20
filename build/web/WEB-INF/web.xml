@@ -37,6 +37,10 @@
         <servlet-name>error</servlet-name>
         <servlet-class>view.error</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CourseInfo</servlet-name>
+        <servlet-class>view.CourseInfo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -60,6 +64,10 @@
     <servlet-mapping>
         <servlet-name>error</servlet-name>
         <url-pattern>/error.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseInfo</servlet-name>
+        <url-pattern>/CourseInfo.view</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
