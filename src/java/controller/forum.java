@@ -1,26 +1,33 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 /**
  *
  * @author Sanjeev
  */
-public class StudentHome extends HttpServlet {
+public class forum extends HttpServlet {
+    @Resource(name = "DB")
+    private DataSource DB;
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -30,34 +37,23 @@ public class StudentHome extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Student Home</title>");            
+            out.println("<title>Servlet forum</title>");            
             out.println("</head>");
             out.println("<body>");
-//            out.println("<h1>StudentHome at " + request.getContextPath() + "</h1>");
-            out.println("<ul>");
-            out.println("<li><a href=\"CourseInfo.view\">View Course Information</a></li>");
-            out.println("<li><a href=\"CourseMaterial.view\">View Course Material</a></li>");
-            out.println("<li><a href=\"postQuery.html\">Post Query</li></a>");
-            out.println("<li><a href=\"sendFeedback.html\">Feedback</li></a>");
-            out.println("<li><a href=\"ChangePassword.view\">Change Password</li></a>");
-            out.println("</ul>");
+            out.println("<h1>Servlet forum at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {            
-            out.close();
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP
-     * <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -71,8 +67,7 @@ public class StudentHome extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP
-     * <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -82,7 +77,22 @@ public class StudentHome extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        try{
+            PrintWriter out = response.getWriter();
+        Connection con = DB.getConnection();
+            PreparedStatement ps = con.prepareStatement("update query set ans = (?) where ques = (?)");
+            String s1=request.getParameter("queryval");
+            String s2=request.getParameter("ansquery");
+            out.println("Answer updated successfully");
+            ps.setString(2,s1);
+            ps.setString(1,s2);
+            ps.executeUpdate();
+            
+         //   RequestDispatcher =
+        }
+        catch(Exception e){}
+            
     }
 
     /**
@@ -94,4 +104,5 @@ public class StudentHome extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

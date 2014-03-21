@@ -41,6 +41,30 @@
         <servlet-name>CourseInfo</servlet-name>
         <servlet-class>view.CourseInfo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CourseMaterial</servlet-name>
+        <servlet-class>view.CourseMaterial</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>postQuery</servlet-name>
+        <servlet-class>controller.postQuery</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sendFeedback</servlet-name>
+        <servlet-class>controller.sendFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ansQuery</servlet-name>
+        <servlet-class>view.ansQuery</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Forum</servlet-name>
+        <servlet-class>view.Forum</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>forum</servlet-name>
+        <servlet-class>controller.forum</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -68,6 +92,30 @@
     <servlet-mapping>
         <servlet-name>CourseInfo</servlet-name>
         <url-pattern>/CourseInfo.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseMaterial</servlet-name>
+        <url-pattern>/CourseMaterial.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>postQuery</servlet-name>
+        <url-pattern>/postQuery.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendFeedback</servlet-name>
+        <url-pattern>/sendFeedback.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ansQuery</servlet-name>
+        <url-pattern>/ansQuery.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Forum</servlet-name>
+        <url-pattern>/Forum.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>forum</servlet-name>
+        <url-pattern>/forum.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

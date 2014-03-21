@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -78,8 +79,11 @@ public class UserType extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String user = request.getParameter("username");
+        session.setAttribute("user", user);
         String pwd = request.getParameter("password");
+        session.setAttribute("pass", pwd);
         if(user.equalsIgnoreCase("Student")){
             if(pwd.equalsIgnoreCase("studpass"))
             {

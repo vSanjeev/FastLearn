@@ -39,7 +39,11 @@ public class FacultyHome extends HttpServlet {
             out.println("<title>Faculty Home</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet FacultyHome at " + request.getContextPath() + "</h1>");
+//            out.println("<h1>StudentHome at " + request.getContextPath() + "</h1>");
+            out.println("<ul>");
+            out.println("<li><a href=\"CourseMaterial.view\">View Course Material</a></li>");
+            out.println("<li><a href=\"ansQuery.view\">Answer Query</li></a>");
+            out.println("</ul>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
