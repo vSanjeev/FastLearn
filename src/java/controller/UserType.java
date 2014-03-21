@@ -6,18 +6,25 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 /**
  *
  * @author Sanjeev
  */
 public class UserType extends HttpServlet {
+    @Resource(name = "DB")
+    private DataSource DB;
 
     /**
      * Processes requests for both HTTP
@@ -78,53 +85,48 @@ public class UserType extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
+        try{
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         String user = request.getParameter("username");
         session.setAttribute("user", user);
         String pwd = request.getParameter("password");
         session.setAttribute("pass", pwd);
-        if(user.equalsIgnoreCase("Student")){
-            if(pwd.equalsIgnoreCase("studpass"))
-            {
+        Connection con = DB.getConnection();
+        Statement s = con.createStatement();
+        String query="select acctype from users where username='"+user+"' and password ='"+pwd+"'";
+    //    out.println(query);
+        ResultSet rs = s.executeQuery(query);
+        String usertype=null;
+        while(rs.next())
+        {
+            usertype=(String)rs.getString(1);
+        }
+        if(usertype.equalsIgnoreCase("Student")){
             RequestDispatcher rd = request.getRequestDispatcher("StudentHome.view");
             rd.forward(request, response);
-            }
-            else
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("error.view");
-                rd.forward(request, response);
-            }
         }
-        else if(user.equalsIgnoreCase("Faculty")){
-            if(pwd.equalsIgnoreCase("facpass"))
+        else if(usertype.equalsIgnoreCase("Faculty"))
             {
             RequestDispatcher rd = request.getRequestDispatcher("FacultyHome.view");
             rd.forward(request, response);
             }
-            else
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("error.view");
-                rd.forward(request, response);
-            }
-        }
-        else if(user.equalsIgnoreCase("Admin")){
-            if(pwd.equalsIgnoreCase("adminpass"))
+            
+        else if(user.equalsIgnoreCase("Admin"))
+            
             {
             RequestDispatcher rd = request.getRequestDispatcher("AdminHome.view");
             rd.forward(request, response);
             }
-            else
-            {
-                RequestDispatcher rd = request.getRequestDispatcher("error.view");
-                rd.forward(request, response);
-            }
-        }
+            
         else
             {
                 RequestDispatcher rd = request.getRequestDispatcher("error.view");
                 rd.forward(request, response);
             }
+        con.close();
+        }
+        catch(Exception e){}
         
     }
 

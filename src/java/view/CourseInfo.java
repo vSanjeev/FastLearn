@@ -60,6 +60,7 @@ public class CourseInfo extends HttpServlet {
             out.println("</ul>");
             out.println("</body>");
             out.println("</html>");
+            con.close();
         }
     }
 

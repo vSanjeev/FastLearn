@@ -89,6 +89,7 @@ public class postQuery extends HttpServlet {
            // ps.setString(1, "ques");
             ps.setString(1, newquery);
             ps.executeUpdate();
+            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

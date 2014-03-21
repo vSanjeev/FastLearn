@@ -4,26 +4,25 @@
  * and open the template in the editor.
  */
 
-package view;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
  *
  * @author Sanjeev
  */
-public class ansQuery extends HttpServlet {
+public class addCourse extends HttpServlet {
     @Resource(name = "DB")
     private DataSource DB;
 
@@ -41,34 +40,16 @@ public class ansQuery extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Connection con = DB.getConnection();
-            Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("select ques from query");
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ansQuery</title>");            
+            out.println("<title>Servlet addCourse</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h4>Choose query and answer</h4>");
-            String s1;
-            
-            out.println("<form action=\"forum.do\" method=\"POST\">\n");
-            out.println("<select name=\"queryval\">");
-            while(rs.next())
-            {
-                s1=(String)rs.getString(1);
-                out.println("<option value=\""+s1+"\">"+s1+"</option>");
-            }
-            out.println("</select>");
-            out.println(
-"Answer<input type=\"text\" name=\"ansquery\"/>\n" +
-"<input type=\"submit\" value=\"Answer Query\" />\n" +
-"</form>");
+            out.println("<h1>Servlet addCourse at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-            con.close();
-        }catch(Exception e){}
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -97,7 +78,23 @@ public class ansQuery extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        try{
+        Connection con = DB.getConnection();
+        Statement s = con.createStatement();
+        PreparedStatement ps = con.prepareStatement("insert into course values(?,?,?,?,?,?)");
+   //     String s1 = request.getParameter("cname");
+        ps.setString(1,request.getParameter("cname"));
+        ps.setString(2,request.getParameter("cinfo"));
+        ps.setString(3,request.getParameter("cmat"));
+        ps.setString(4,request.getParameter("cdur"));
+        ps.setString(5,request.getParameter("cpr"));
+        ps.setString(6,request.getParameter("cfee"));
+        ps.executeUpdate();
+        con.close();
+        }
+        catch(Exception e){}
+        
     }
 
     /**

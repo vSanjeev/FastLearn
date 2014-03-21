@@ -65,6 +65,18 @@
         <servlet-name>forum</servlet-name>
         <servlet-class>controller.forum</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>feedback</servlet-name>
+        <servlet-class>view.feedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseManagement</servlet-name>
+        <servlet-class>view.CourseManagement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addCourse</servlet-name>
+        <servlet-class>controller.addCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>action</servlet-name>
         <url-pattern>*.do</url-pattern>
@@ -116,6 +128,18 @@
     <servlet-mapping>
         <servlet-name>forum</servlet-name>
         <url-pattern>/forum.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>feedback</servlet-name>
+        <url-pattern>/feedback.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseManagement</servlet-name>
+        <url-pattern>/CourseManagement.view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addCourse</servlet-name>
+        <url-pattern>/addCourse.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

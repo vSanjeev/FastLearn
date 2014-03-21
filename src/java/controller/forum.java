@@ -88,7 +88,7 @@ public class forum extends HttpServlet {
             ps.setString(2,s1);
             ps.setString(1,s2);
             ps.executeUpdate();
-            
+            con.close();
          //   RequestDispatcher =
         }
         catch(Exception e){}

@@ -93,6 +93,7 @@ public class sendFeedback extends HttpServlet {
             
             ps.setString(2, newfeedback);
             ps.executeUpdate();
+            con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

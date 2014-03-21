@@ -69,6 +69,7 @@ public class CourseMaterial extends HttpServlet {
             }
             out.println("</body>");
             out.println("</html>");
+            con.close();
         }
     }
 

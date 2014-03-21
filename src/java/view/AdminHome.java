@@ -39,7 +39,12 @@ public class AdminHome extends HttpServlet {
             out.println("<title>Administrator Home</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>AdminHome at " + request.getContextPath() + "</h1>");
+            out.println("<ul>");
+            out.println("<li><a href=\"addCourse.html\">Course Management</a></li>");
+            out.println("<li><a href=\"StudentManagement.view\">Student Management</a></li>");
+            out.println("<li><a href=\"FacultyManagement.view\">Faculty Management</a></li>");
+            out.println("<li><a href=\"feedback.view\">View Feedback</li></a>");
+            out.println("</ul>");
             out.println("</body>");
             out.println("</html>");
         } finally {            
